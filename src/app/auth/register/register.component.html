@@ -1,0 +1,43 @@
+<mat-card>
+  <h2>Register Form!</h2>
+  <form [formGroup]="form" (ngSubmit)="onRegister()">
+    <div class="form-group">
+        <label for="userName">User Name</label>
+        <input type="text" formControlName="userName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
+        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+            <div *ngIf="f.userName.errors.required">User Name is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput name="dateOfBirth" #matDatepicker [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="matDatepicker.invalid">Please Enter date!</mat-error>
+      </mat-form-field>
+  </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Register
+        </button>
+        <a routerLink="../login" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+</mat-card>
